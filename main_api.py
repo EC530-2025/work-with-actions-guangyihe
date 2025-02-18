@@ -19,10 +19,44 @@ def add_house():
         if p not in data:
             return make_response(jsonify({"error": f"Missing required parameter: {p}"}), 400)
 
-    # TODO: 这里可进行进一步的参数校验（类型、数值范围等等）
+    # 参数校验
+    if not isinstance(data["name"], str) or not data["name"].strip():
+        return make_response(jsonify({"error": "Invalid 'name': must be a non-empty string"}), 400)
+
+    if not isinstance(data["addr"], str) or not data["addr"].strip():
+        return make_response(jsonify({"error": "Invalid 'addr': must be a non-empty string"}), 400)
+
+    if not isinstance(data["uid"], str) or not data["uid"].strip():
+        return make_response(jsonify({"error": "Invalid 'uid': must be a non-empty string"}), 400)
+
+    try:
+        lat = float(data["lat"])
+        lon = float(data["lon"])
+    except ValueError:
+        return make_response(jsonify({"error": "Invalid 'lat' or 'lon': must be valid floating-point numbers"}), 400)
+
+    if not (-90 <= lat <= 90):
+        return make_response(jsonify({"error": "Invalid 'lat': must be between -90 and 90"}), 400)
+
+    if not (-180 <= lon <= 180):
+        return make_response(jsonify({"error": "Invalid 'lon': must be between -180 and 180"}), 400)
+
+    try:
+        floors = int(data["floors"])
+        size = int(data["size"])
+    except ValueError:
+        return make_response(jsonify({"error": "Invalid 'floors' or 'size': must be integers"}), 400)
+
+    if floors <= 0:
+        return make_response(jsonify({"error": "Invalid 'floors': must be a positive integer"}), 400)
+
+    if size <= 0:
+        return make_response(jsonify({"error": "Invalid 'size': must be a positive integer"}), 400)
+
     # TODO: 实际的添加逻辑
 
     return make_response(jsonify({"message": "House added successfully"}), 200)
+
 
 
 # 1.2 House - Remove
