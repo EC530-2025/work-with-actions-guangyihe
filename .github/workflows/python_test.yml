@@ -28,4 +28,4 @@ jobs:
           pip install pytest flask  # 只安装 pytest 和 flask
 
       - name: Run Pytest
-        run: pytest test_main_api.py  # 运行 pytest 测试
+        run: pytest ./test_main_api.py  # 运行 pytest 测试
