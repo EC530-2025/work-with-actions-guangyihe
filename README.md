@@ -182,6 +182,3 @@ Below are some basic examples using `cURL` (with `POST` shown here as an example
 
 ---
 
-**Thank you for using this sample project!**  
-If you have any questions or suggestions, feel free to reach out and discuss.
-
